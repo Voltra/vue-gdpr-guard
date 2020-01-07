@@ -9,7 +9,7 @@
             :enable="enable"
             :disable="disable"/>
 
-        <template v-if="hasGroups">
+        <template v-if="hasGroups && recursive">
             <gdpr-group
                 v-for="gp in group.groups"
                 :key="gp.name" v-html="$scopedSlots.default({
@@ -33,6 +33,10 @@
             group: {
                 type: Object,
                 required: true,
+            },
+            recursive: {
+                type: Boolean,
+                default: true,
             }
         },
         inject: [
