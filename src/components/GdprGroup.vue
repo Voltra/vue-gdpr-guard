@@ -13,7 +13,8 @@
             <gdpr-group
                 :recursive="recursive"
                 v-for="gp in group.groups"
-                :key="gp.name" v-html="$scopedSlots.default({
+                :key="gp.name"
+                v-html="$scopedSlots.default({
                     group: gp,
                     guards: gp.guards,
                     manager,
@@ -28,8 +29,11 @@
 </template>
 
 <script>
+    import enabledState from "../mixins/enabledState"
+
     export default {
         name: "gdpr-group",
+        mixins: [enabledState],
         props: {
             group: {
                 type: Object,
@@ -43,7 +47,6 @@
         inject: [
             "manager",
             "groups",
-            "handler",
         ],
         provide(){
             return {
@@ -53,19 +56,14 @@
         },
         data(){
             return {
-                toggle: () => this.handler.toggleForGroup(this.group),
-                group_: this.$gdpr.getGroup(this.group.name),
+                toggle: this.toggleForItem(this.group),
+                enable: this.enableForItem(this.group),
+                disable: this.disableForItem(this.group),
             };
         },
         computed: {
             hasGroups(){
                 return "groups" in this.group;
-            },
-            enable(){
-                return () => this.group_ && this.group_.enable();
-            },
-            disable(){
-                return () => this.group_ && this.group_.disable();
             },
         },
     }

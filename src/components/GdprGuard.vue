@@ -12,31 +12,26 @@
 </template>
 
 <script>
-export default {
-    props: {
-        guard: {
-            type: Object,
-            required: true,
+    import enabledState from "../mixins/enabledState"
+
+    export default {
+        mixins: [enabledState],
+        props: {
+            guard: {
+                type: Object,
+                required: true,
+            },
         },
-    },
-    inject: [
-        "manager",
-        "group",
-        "handler",
-    ],
-    data(){
-        return {
-            toggle: () => this.handler.toggleForItem(this.guard),
-            guard_: this.$gdpr.getGuard(this.guard.name),
-        };
-    },
-    computed: {
-        enable(){
-            return this.guard_ && this.guard_.enable();
+        inject: [
+            "manager",
+            "group",
+        ],
+        data(){
+            return {
+                toggle: this.toggleForItem(this.guard),
+                enable: this.enableForItem(this.guard),
+                disable: this.disableForItem(this.guard),
+            };
         },
-        disable(){
-            return this.guard_ && this.guard_.disable();
-        },
-    },
-}
+    }
 </script>

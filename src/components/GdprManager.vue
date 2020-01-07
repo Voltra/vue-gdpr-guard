@@ -22,27 +22,23 @@
                 toggle: () => this.$gdpr.toggle(),
                 enable: () => this.$gdpr.enable(),
                 disable: () => this.$gdpr.disable(),
+
+                onGdprChange: () => {
+                    this.$deepmerge(this.manager, this.$gdpr.raw());
+                },
             };
         },
         provide(){
             return {
-                handler: this,
                 manager: this.manager,
                 groups: this.manager.groups,
             }
         },
-        mounted(){
-            this.$gdpr.$on("change", () => {
-                this.$deepmerge(this.manager, this.$gdpr.raw());
-            });
+        created(){
+            this.$gdpr.$on("change", this.onGdprChange);
         },
-        methods: {
-            toggleForItem(item){
-                return () => this.$gdpr.toggle(item.name);
-            },
-            toggleItem(item){
-                this.toggleForItem(item)();
-            },
+        beforeDestroy(){
+            this.$gdpr.$off("change", this.onGdprChange);
         },
     }
 </script>
