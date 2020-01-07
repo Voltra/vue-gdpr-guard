@@ -11,6 +11,7 @@
 
         <template v-if="hasGroups && recursive">
             <gdpr-group
+                :recursive="recursive"
                 v-for="gp in group.groups"
                 :key="gp.name" v-html="$scopedSlots.default({
                     group: gp,
