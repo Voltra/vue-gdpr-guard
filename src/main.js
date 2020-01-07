@@ -3,6 +3,10 @@ import VueDeepMerge from "./plugins/deepmerge"
 import GdprManager from "./components/GdprManager.vue"
 import GdprGroup from "./components/GdprGroup.vue"
 import GdprGuard from "./components/GdprGuard.vue"
+import { GdprManagerBuilder } from "gdpr-guard"
+
+//TODO: Allow hotswap of managers
+
 
 const VueGdprGuard = {
     /**
@@ -33,6 +37,7 @@ const VueGdprGuard = {
 
 export {
     VueGdprGuard,
+    GdprManagerBuilder,
 
     GdprManager,
     GdprGroup,
