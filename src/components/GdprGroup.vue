@@ -8,23 +8,6 @@
             :toggle="toggle"
             :enable="enable"
             :disable="disable"/>
-
-        <template v-if="hasGroups && recursive">
-            <gdpr-group
-                :recursive="recursive"
-                v-for="gp in group.groups"
-                :key="gp.name"
-                v-html="$scopedSlots.default({
-                    group: gp,
-                    guards: gp.guards,
-                    manager,
-
-                    toggle: handler.toggleForItem(gp),
-                    enable: () => $gdpr.hasGroup(gp.name) && $gdpr.getGroup(gp.name).enable(),
-                    disable: () => $gdpr.hasGroup(gp.name) && $gdpr.getGroup(gp.name).disable(),
-            })">
-            </gdpr-group>
-        </template>
     </div>
 </template>
 
@@ -52,6 +35,8 @@
             return {
                 group: this.group,
                 guards: this.group.guards,
+                groupSlot: this.$scopedSlots.default.bind(this.$scopedSlots),
+                recursiveGuard: this.recursive,
             };
         },
         data(){
