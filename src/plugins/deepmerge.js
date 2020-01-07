@@ -1,8 +1,8 @@
 // Taken from https://github.com/vuejs/vue/issues/9853
 
-export default {
+const plugin = {
     install(Vue){
-        Vue.deepmerge = (baseValue, value) => {
+        const deepmerge = (baseValue, value) => {
             // merge arrays
             if (Array.isArray(baseValue) && Array.isArray(value)) {
                 for (let i = 0; i < value.length; i  ) {
@@ -37,5 +37,10 @@ export default {
             else
                 return baseValue;
         };
+
+        Vue.prototype.$deepmerge = deepmerge;
+        Vue.deepmerge = deepmerge;
     }
 }
+
+export default plugin
