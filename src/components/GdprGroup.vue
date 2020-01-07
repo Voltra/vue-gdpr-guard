@@ -1,22 +1,21 @@
-<template>
-    <div class="gdpr-manager__group">
-        <slot
-            :group="group"
-            :guards="group.guards"
-            :manager="manager"
-
-            :toggle="toggle"
-            :enable="enable"
-            :disable="disable"/>
-    </div>
-</template>
-
 <script>
     import enabledState from "../mixins/enabledState"
+    import renderless from "../mixins/renderless"
 
     export default {
         name: "gdpr-group",
-        mixins: [enabledState],
+        render(){
+            return this.$renderless({
+                group: this.group,
+                guards: this.group.guards,
+                manager: this.manager,
+
+                toggle: this.toggle,
+                enable: this.enable,
+                disableForItem: this.disable,
+            });
+        },
+        mixins: [enabledState, renderless],
         props: {
             group: {
                 type: Object,

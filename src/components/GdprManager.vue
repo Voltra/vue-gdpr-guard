@@ -1,17 +1,18 @@
-<template>
-    <div class="gdpr-manager">
-        <slot
-            :groups="groups"
-            :manager="manager"
-
-            :toggle="toggle"
-            :enable="enable"
-            :disable="disable"/>
-    </div>
-</template>
-
 <script>
+    import renderless from "../mixins/renderless"
+
     export default {
+        render(){
+            return this.$renderless({
+                groups: this.groups,
+                manager: this.manager,
+
+                toggle: this.toggle,
+                enable: this.enable,
+                disable: this.disable,
+            });
+        },
+        mixins: [renderless],
         data(){
             /**
              * @type {object} o

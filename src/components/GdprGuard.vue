@@ -28,10 +28,23 @@
 
 <script>
     import enabledState from "../mixins/enabledState"
+    import renderless from "../mixins/renderless"
     import GdprGuard from "./GdprGuard.vue"
 
     export default {
-        mixins: [enabledState],
+        render(h){
+            if(!this.hasGuards){
+                // regular guard
+                return this.$renderless(this.guardPayload);
+            }else if(this.recursiveGuard){
+                // group and recursive
+                return h(GdprGuard, this.groupProps, this.renderGroup());
+            }else{
+                //group but don't handle
+                return null;
+            }
+        },
+        mixins: [enabledState, renderless],
         components: {
             GdprGuard,
         },
@@ -54,9 +67,40 @@
                 disable: this.disableForItem(this.guard),
             };
         },
+        methods: {
+            renderGroup(){
+                return this.groupSlot(this.groupPayload);
+            }
+        },
         computed: {
             hasGuards(){
                 return "guards" in this.guard;
+            },
+            guardPayload(){
+                return {
+                    guard: this.guard,
+                    toggle: this.toggle,
+                    enable: this.enable,
+                    disable: this.disable,
+
+                    group: this.group,
+                    manager: this.manager,
+                };
+            },
+            groupPayload(){
+                return {
+                    ...this.guardPayload,
+                    group: this.guard,
+                    guards: this.guard.guards,
+                };
+            },
+            groupProps(){
+                return {
+                    props: {
+                        group: this.guard,
+                        recursive: this.recursiveGuard,
+                    }
+                };
             }
         },
     }
