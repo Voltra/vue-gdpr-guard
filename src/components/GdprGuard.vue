@@ -1,52 +1,34 @@
-<template>
-    <div class="gdpr-manager__guard">
-        <slot
-            v-if="!hasGuards"
-            :guard="guard"
-            :toggle="toggle"
-            :enable="enable"
-            :disable="disable"
-
-            :group="group"
-            :manager="manager"/>
-
-            <template v-else-if="recursiveGuard">
-                <GdprGuard
-                    :group="guard"
-                    :recursive="recursiveGuard"
-                    v-html="groupSlot({
-                        group: guard,
-                        guards: group.guards,
-                        manager,
-                        toggle,
-                        enable,
-                        disable,
-                    })"/>
-            </template>
-    </div>
-</template>
-
 <script>
     import enabledState from "../mixins/enabledState"
     import renderless from "../mixins/renderless"
-    import GdprGuard from "./GdprGuard.vue"
+    import GdprGroup from "./GdprGroup.vue"
+
+    //TODO: Fix recursion problem (infinite)
 
     export default {
         render(h){
+            console.table({
+                name: this.guard.name,
+                isGroup: this.hasGuards,
+                recursive: this.recursiveGuard,
+            });
+
             if(!this.hasGuards){
                 // regular guard
                 return this.$renderless(this.guardPayload);
             }else if(this.recursiveGuard){
-                // group and recursive
-                return h(GdprGuard, this.groupProps, this.renderGroup());
-            }else{
-                //group but don't handle
-                return null;
+                return this.recursiveGuard
+                ? h(
+                    GdprGroup, //component
+                    this.groupRenderOptions, //options
+                    [this.$gdprGroup.$renderless(this.groupProps)], //children
+                ) // group and recursive
+                : null; //group but don't handle
             }
         },
         mixins: [enabledState, renderless],
         components: {
-            GdprGuard,
+            GdprGroup,
         },
         props: {
             guard: {
@@ -59,6 +41,7 @@
             "group",
             "groupSlot",
             "recursiveGuard",
+            "$gdprGroup",
         ],
         data(){
             return {
@@ -76,29 +59,45 @@
             hasGuards(){
                 return "guards" in this.guard;
             },
+            sharedPayload(){
+                return {
+                    manager: this.manager,
+                    group: this.group,
+                };
+            },
             guardPayload(){
                 return {
+                    ...this.sharedPayload,
                     guard: this.guard,
-                    toggle: this.toggle,
-                    enable: this.enable,
-                    disable: this.disable,
 
-                    group: this.group,
-                    manager: this.manager,
+                    toggleGuard: this.toggle,
+                    enableGuard: this.enable,
+                    disableGuard: this.disable,
                 };
             },
             groupPayload(){
                 return {
-                    ...this.guardPayload,
+                    ...this.sharedPayload,
                     group: this.guard,
                     guards: this.guard.guards,
+
+                    toggleGroup: this.toggle,
+                    enableGroup: this.enable,
+                    disableGroup: this.enable,
                 };
             },
             groupProps(){
                 return {
-                    props: {
-                        group: this.guard,
-                        recursive: this.recursiveGuard,
+                    group: this.guard,
+                    recursive: this.recursiveGuard,
+                };
+            },
+            groupRenderOptions(){
+                return {
+                    props: this.groupProps,
+                    slot: "default",
+                    scopedSlots: {
+                        default: this.$gdprGroup.$renderless(this.groupProps)
                     }
                 };
             }

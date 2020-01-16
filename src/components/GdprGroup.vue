@@ -10,9 +10,9 @@
                 guards: this.group.guards,
                 manager: this.manager,
 
-                toggle: this.toggle,
-                enable: this.enable,
-                disableForItem: this.disable,
+                toggleGroup: this.toggle,
+                enableGroup: this.enable,
+                disableGroup: this.disable,
             });
         },
         mixins: [enabledState, renderless],
@@ -31,11 +31,16 @@
             "groups",
         ],
         provide(){
+            const groupSlot = (this.$scopedSlots && "default" in this.$scopedSlots)
+            ? (...args) => this.$renderless(...args)
+            : () => null;
+
             return {
                 group: this.group,
                 guards: this.group.guards,
-                groupSlot: this.$scopedSlots.default.bind(this.$scopedSlots),
+                groupSlot,
                 recursiveGuard: this.recursive,
+                $gdprGroup: this,
             };
         },
         data(){

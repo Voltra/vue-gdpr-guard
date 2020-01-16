@@ -4,12 +4,12 @@
     export default {
         render(){
             return this.$renderless({
-                groups: this.groups,
+                groups: this.manager.groups,
                 manager: this.manager,
 
-                toggle: this.toggle,
-                enable: this.enable,
-                disable: this.disable,
+                toggleManager: this.toggle,
+                enableManager: this.enable,
+                disableManager: this.disable,
             });
         },
         mixins: [renderless],
@@ -26,6 +26,7 @@
 
                 onGdprChange: () => {
                     this.$deepmerge(this.manager, this.$gdpr.raw());
+                    // this.manager = this.$gdpr.raw();
                 },
             };
         },

@@ -19,7 +19,7 @@ const VueGdprGuard = {
         const wrapper = new ManagerWrapper(options.manager);
 
         const desc = {
-            get: () => wrapper,
+            value: wrapper,
             configurable: false,
             enumerable: true,
             writable: false,

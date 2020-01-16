@@ -1,7 +1,7 @@
 export default {
     methods: {
         toggleForItem({ name }){
-            return () => this.$gdpr.toggle(name);
+            return () => this.$gdpr.hasGuard(name) && this.$gdpr.getGuard(name).toggle();
         },
         toggleItem(item){
             this.toggleForItem(item)();
