@@ -7,23 +7,17 @@
 
     export default {
         render(h){
-            console.table({
-                name: this.guard.name,
-                isGroup: this.hasGuards,
-                recursive: this.recursiveGuard,
-            });
-
             if(!this.hasGuards){
                 // regular guard
                 return this.$renderless(this.guardPayload);
             }else if(this.recursiveGuard){
-                return this.recursiveGuard
-                ? h(
+                return !this.recursiveGuard
+                ? null //group but don't handle
+                : h(
                     GdprGroup, //component
                     this.groupRenderOptions, //options
                     [this.$gdprGroup.$renderless(this.groupProps)], //children
-                ) // group and recursive
-                : null; //group but don't handle
+                ); // group and recursive
             }
         },
         mixins: [enabledState, renderless],
@@ -95,9 +89,8 @@
             groupRenderOptions(){
                 return {
                     props: this.groupProps,
-                    slot: "default",
                     scopedSlots: {
-                        default: this.$gdprGroup.$renderless(this.groupProps)
+                        default: this.$gdprGroup.$renderless,
                     }
                 };
             }

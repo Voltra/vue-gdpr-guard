@@ -25,8 +25,8 @@
                 disable: () => this.$gdpr.disable(),
 
                 onGdprChange: () => {
-                    this.$deepmerge(this.manager, this.$gdpr.raw());
-                    // this.manager = this.$gdpr.raw();
+                    // this.$deepmerge(this.manager, this.$gdpr.raw());
+                    this.manager = this.$gdpr.raw();
                 },
             };
         },

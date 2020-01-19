@@ -45,34 +45,42 @@ const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue{
         return JSON.stringify(this.json());
     }
 
-    disable(){
-        this.manager.disable();
-        return this.$emitEvent("disable");
+    _wrap(method, target = null, ...args){
+        if(target === null){
+            this.manager[method](...args);
+            return this.$emitEvent(method, ...args);
+        }
+
+        if(this.hasGuard(target)){
+            this.getGuard(target)[method](...args);
+            return this.$emitEvent(method, ...args);
+        }
+
+        return this;
     }
 
-    enable(){
-        this.manager.enable();
-        return this.$emitEvent("enable");
+    disable(target = null){
+        return this._wrap("disable", target);
     }
 
-    toggle(){
-        this.manager.toggle();
-        return this.$emitEvent("toggle");
+    enable(target = null){
+        return this._wrap("enable", target);
     }
 
-    disableForStorage(storage){
-        this.manager.disableForStorage(storage);
-        return this.$emitEvent("disableForStorage", storage);
+    toggle(target = null){
+        return this._wrap("toggle", target);
     }
 
-    enableForStorage(storage){
-        this.manager.enableForStorage(storage);
-        return this.$emitEvent("enableForStorage", storage);
+    disableForStorage(storage, target = null){
+        return this._wrap("disableForStorage", target, storage);
     }
 
-    toggleForStorage(storage){
-        this.manager.toggleForStorage(storage);
-        return this.$emitEvent("toggleForStorage", storage);
+    enableForStorage(storage, target = null){
+        return this._wrap("enableForStorage", target, storage);
+    }
+
+    toggleForStorage(storage, target = null){
+        return this._wrap("toggleForStorage", target, storage);
     }
 
     isEnabled(name){
