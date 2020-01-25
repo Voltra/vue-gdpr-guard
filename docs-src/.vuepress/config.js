@@ -1,4 +1,5 @@
 module.exports = {
+    // base: "/vue-gdpr-guard/",
     dest: "../docs",
     themeConfig: {
         smoothScroll: true,
@@ -19,7 +20,8 @@ module.exports = {
                 ],
                 prev: "/plugin",
                 next: "/components/GdprManager",
-            }
+            },
+            '/helpers',
         ],
     },
 };

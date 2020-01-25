@@ -30,7 +30,7 @@ This component exposes the group's state contained within the `group` prop. It a
 
 | Slot props   | Type                                                         | Description                                                 |
 | ------------ | ------------------------------------------------------------ | ----------------------------------------------------------- |
-| group        | [`GdprGuardGroupRaw`](https://voltra.github.io/gdpr-guard/interfaces/gdprguardgroupraw.html) | allows access to the group's state (e.g. toggle all)        |
+| group        | [`GdprGuardGroupRaw`](https://voltra.github.io/gdpr-guard/interfaces/gdprguardgroupraw.html) | allows access to the group's state                          |
 | guards       | [`GdprGuardRaw[]`](https://voltra.github.io/gdpr-guard/interfaces/gdprguardraw.html) | access the group's guards and sub-groups                    |
 | toggleGroup  | `() => void`                                                 | toggle the group state and set every state to its new value |
 | enableGroup  | `() => void`                                                 | enable every guards and sub-groups                          |

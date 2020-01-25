@@ -46,7 +46,7 @@ import {
 
 ::: tip
 
-You can browse each components' documentation here
+You can browse each components' documentation [here](/components/)
 
 :::
 
