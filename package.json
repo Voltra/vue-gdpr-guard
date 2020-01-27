@@ -1,24 +1,36 @@
 {
-  "name": "lib",
-  "version": "0.1.0",
+  "main": "dist/vue-gdpr-guard.umd.min.js",
+  "name": "vue-gdpr-guard",
+  "version": "1.0.0",
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "gdpr",
+    "rgpd"
+  ],
   "scripts": {
-    "serve": "vue-cli-service serve",
     "serve": "vue-cli-service build",
-    "build-lib": "vue-cli-service build --target lib --name vue-gdpr-guard src/main.js",
+    "build:lib": "vue-cli-service build --target lib --name vueGdprGuard --filename vue-gdpr-guard src/main.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.4.4",
-    "vue": "^2.6.10"
+    "gdpr-guard": "^1.2.2"
   },
+  "bugs": {
+    "url": "https://github.com/Voltra/vue-gdpr-guard/issues"
+  },
+  "homepage": "https://github.com/Voltra/vue-gdpr-guard#readme",
   "devDependencies": {
+    "core-js": "^3.4.4",
+    "vue": "^2.6.10",
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
     "@vue/cli-service": "^4.1.0",
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.6.10",
+    "vuepress-plugin-clean-urls": "^1.1.1"
   },
   "eslintConfig": {
     "root": true,
