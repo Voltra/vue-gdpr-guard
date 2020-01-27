@@ -4,6 +4,10 @@
 
 
 
+You can have a look at the [guide](https://voltra.github.io/vue-gdpr-guard/). You can also have a look at this [code sandbox](https://codesandbox.io/embed/serverless-moon-fl5tc?fontsize=14&hidenavigation=1&theme=dark) to see a minimal example.
+
+
+
 ## Example
 
 MyComponent.vue
@@ -59,11 +63,12 @@ MyComponent.vue
 index.js
 
 ```javascript
-import { VueGdprGuard, GdprManagerBuilder } from "vue-gdpr-guard"
+import { VueGdprGuard } from "vue-gdpr-guard"
+import { GdprManagerBuilder } from "gdpr-guard"  
 import Vue from "vue"
 
 const manager = GdprManagerBuilder.make()
-// [...]
+	// [...]
 .build();
 
 Vue.use(VueGdprGuard, { manager });
@@ -84,7 +89,3 @@ Vue.use(VueGdprGuard, { manager });
 ### Helpers
 
 `VueGdprGuard` is the vue plugin to register in order to use the library. Note that it requires a `manager` in its installation options.
-
-
-
-`GdprManagerBuilder` is directly exported from the `gdpr-guard` package in order to ease the creation of a manager.
