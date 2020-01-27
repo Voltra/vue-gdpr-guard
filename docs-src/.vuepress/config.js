@@ -1,5 +1,5 @@
 module.exports = {
-    // base: "/vue-gdpr-guard/",
+    base: "/vue-gdpr-guard/",
     dest: "../docs",
     themeConfig: {
         smoothScroll: true,

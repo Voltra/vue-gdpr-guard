@@ -34,7 +34,7 @@ The "target" are the unique name given to your guards.
 
 | method            | arguments                                      | returns                                                      | description                                                  |
 | ----------------- | ---------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| raw               | :x:                                            | [GdprManagerRaw](https://voltra.github.io/gdpr-guard/interfaces/gdprmanagerraw.html) | Get the raw representation of the manager's state            |
+| raw               | :x:                                            | [`GdprManagerRaw`](https://voltra.github.io/gdpr-guard/interfaces/gdprmanagerraw.html) | Get the raw representation of the manager's state            |
 | json              |                                                |                                                              | Alias for `ManagerWrapper#raw`                               |
 | toString          | :x:                                            | `string`                                                     | The actual JSON string representation of the manager's state |
 | disable           | `target: ?string = null`                       | `ManagerWrapper`                                             | Disable the target (or itself if no target is provided)      |
