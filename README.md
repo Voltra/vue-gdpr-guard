@@ -1,5 +1,9 @@
 # vue-gdpr-guard
 
+//TODO: Adapt library to Savior API
+
+<center><img src="./vue-gdpr-guard.png" alt="Logo" width="250"/></center>
+
 `vue-gdpr-guard` is the Vue binding for the library `gdpr-guard`. It exposes components as well as a plugin that allows to use `gdpr-guard` without the hassle of knowing how to wire you components. It uses *~~almost~~* renderless components and scoped-slots in order to provide maximum customization.
 
 

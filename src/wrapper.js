@@ -9,8 +9,19 @@ const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue{
      */
     constructor(manager){
         super();
-        this.manager = manager;
+		this.hotswap(manager);
     }
+
+	/**
+	 * Swap the wrapped manager on the fly
+	 * @param {import("gdpr-guard/dist/GdprManager").GdprManager} manager
+	 * @returns {import("gdpr-guard/dist/GdprManager").GdprManager|null}
+	 */
+	hotswap(manager){
+		const oldManager = this.manager;
+		this.manager = manager;
+		return oldManager || null;
+	}
 
     /**
      * Emit a wrapper event
