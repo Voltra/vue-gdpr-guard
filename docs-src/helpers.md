@@ -5,7 +5,7 @@
 The helpers exposed by this library are available both on the Vue instances and on the Vue object itself once the plugin is registered :
 
 ```javascript
-Vue.myHelper /* [...] */
+Vue.$myHelper /* [...] */
 this.$myHelper /* [...] */
 ```
 
@@ -17,12 +17,13 @@ this.$myHelper /* [...] */
 | ----------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | GdprStorage | [`enum GdprStorage`](https://voltra.github.io/gdpr-guard/enums/gdprstorage.html) | Enum that lists the storage locations available              |
 | gdpr        | `ManagerWrapper extends Vue`                                 | Wrapper around a naked [GdprManager](https://voltra.github.io/gdpr-guard/classes/gdprmanager.html) that provides superpowers as well as an "event bus" interface |
+| gdpr_savior | `VueSavior extends GdprSaviorAdapter`                        | Wrapper around a naked [GdprSavior](https://voltra.github.io/gdpr-guard/interfaces/gdprsavior.html) that allows to properly reflect changes and give access to saving/restoring/checking |
 
 
 
 ## Storage
 
-This plugin exposes `gdpr-guard`'s [GdprStorage](https://voltra.github.io/gdpr-guard/enums/gdprstorage.html) which allows you to perform conditionnal rendering within your templates if you ever wish to do so.
+This plugin exposes `gdpr-guard`'s [GdprStorage](https://voltra.github.io/gdpr-guard/enums/gdprstorage.html) which allows you to perform conditional rendering within your templates if you ever wish to do so.
 
 
 

@@ -2,6 +2,8 @@
 
 >  The official vue binding for [gdpr-guard](https://npmjs.com/package/gdpr-guard).
 
+<center><img src="https://raw.githubusercontent.com/Voltra/vue-gdpr-guard/dev/vue-gdpr-guard.png" alt="logo" width="250"/> </center>
+
 This is the complete guide for using [vue-gdpr-guard](https://npmjs.com/package/vue-gdpr-guard), what you will find here includes, but is not limited to :
 
 * The list of exports
