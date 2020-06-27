@@ -14,7 +14,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "gdpr-guard": "^2.1.0"
+    "gdpr-guard": "^2.1.0",
+    "vue-types": "^1.7.0"
   },
   "bugs": {
     "url": "https://github.com/Voltra/vue-gdpr-guard/issues"

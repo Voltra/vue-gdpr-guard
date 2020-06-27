@@ -8,7 +8,12 @@ const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue{
      * @param {import("gdpr-guard/dist/GdprManager").GdprManager} manager
      */
     constructor(manager){
-        super();
+        super({
+			data: {
+				manager,
+			},
+		});
+
 		this.hotswap(manager);
     }
 
@@ -19,7 +24,8 @@ const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue{
 	 */
 	hotswap(manager){
 		const oldManager = this.manager;
-		this.manager = manager;
+		Vue.set(this, "manager", manager);
+		this.$emitEvent("hotswap");
 		return oldManager || null;
 	}
 
@@ -32,7 +38,8 @@ const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue{
      * @returns {ManagerWrapper}
      */
     $emitEvent(event, ...args){
-        this.$emit("change", ...args);
+		console.log(`Emitting "${event}"`);
+		this.$emit("change", ...args);
         this.$emit(event, ...args);
         return this;
     }

@@ -34,7 +34,7 @@ class VueSavior extends GdprSaviorAdapter{
 			if(manager == $gdpr.manager) // exact same object, no need to swap
 				return;
 
-			$gdpr.manager = manager;
+			$gdpr.hotswap(manager);
 		}else{
 			this.__nextTick(() => this.updateSharedManager(manager));
 		}

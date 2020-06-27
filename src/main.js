@@ -4,7 +4,7 @@ import { gdprMixin } from "./mixins/gdpr"
 import GdprManager from "./components/GdprManager.vue"
 import GdprGroup from "./components/GdprGroup.vue"
 import GdprGuard from "./components/GdprGuard.vue"
-import { GdprStorage } from "gdpr-guard"
+import { GdprStorage, GdprManager as GManager } from "gdpr-guard"
 
 const assertCorrectOptions = options => {
 	const fail = msg => {
@@ -38,7 +38,7 @@ const VueGdprGuard = {
 	 *	savior: import("gdpr-guard/dist/serde/GdprSavior").GdprSavior
 	 * }} options
      */
-    async install(Vue, options){
+    install(Vue, options){
 		assertCorrectOptions(options);
 		const {
 			factory,
@@ -47,33 +47,40 @@ const VueGdprGuard = {
 
 		const vueSavior = new VueSavior(Vue, savior);
         const ManagerWrapper = ManagerWrapperFactory(Vue);
-        
-		const manager = await vueSavior.restoreOrCreate(factory);
-		const wrapper = new ManagerWrapper(manager);
+       
+		const desc = val => ({
+			value: val,
+			configurable: false,
+			enumerable: true,
+			writable: false,
+		});
 
-        const desc = val => ({
-            value: val,
-            configurable: false,
-            enumerable: true,
-            writable: false,
-        });
+		const installTargets = [Vue, Vue.prototype];
 
-        [{
-            key: "gdpr",
-            value: desc(wrapper),
-        }, {
-            key: "GdprStorage",
-            value: desc(GdprStorage),
-        }, {
+		const install = ({ key, value }) => {
+			installTargets
+			.forEach(target => Object.defineProperty(target, `$${key}`, value));
+		};
+
+
+		const dummyManager = GManager.create([]);
+		const wrapper = new ManagerWrapper(dummyManager);
+
+		[{
+			key: "GdprStorage",
+			value: desc(GdprStorage),
+		}, {
 			key: "gdpr_savior",
 			value: desc(vueSavior),
-		}].forEach(({key, value}) => {
-			[Vue, Vue.prototype].forEach(target => {
-				Object.defineProperties(target, {
-					[`$${key}`]: value,
-				});
-			});
-        });
+		}, {
+			key: "gdpr",
+			value: desc(wrapper),
+		}].forEach(install);
+
+		(async () => {
+			const manager = await vueSavior.restoreOrCreate(factory);
+			Vue.$gdpr.hotswap(manager);
+		})();
     }
 };
 
