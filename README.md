@@ -1,6 +1,6 @@
 # vue-gdpr-guard
 
-//TODO: Adapt library to Savior API
+//TODO: Release new major function
 
 <center><img src="./vue-gdpr-guard.png" alt="Logo" width="250"/></center>
 
