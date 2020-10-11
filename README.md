@@ -1,10 +1,15 @@
 # vue-gdpr-guard
 
-`vue-gdpr-guard` is the Vue binding for the library `gdpr-guard`. It exposes components as well as a plugin that allows to use `gdpr-guard` without the hassle of knowing how to wire you components. It uses *~~almost~~* renderless components and scoped-slots in order to provide maximum customization.
+<center><img src="./vue-gdpr-guard.png" alt="Logo" width="250"/></center>
+
+`vue-gdpr-guard` is the Vue binding for the library `gdpr-guard`.
+It exposes components as well as a plugin that allows to use `gdpr-guard` without the hassle of knowing how to wire you components.
+It uses *~~almost~~* renderless components and scoped-slots in order to provide maximum customization.
 
 
 
-You can have a look at the [guide](https://voltra.github.io/vue-gdpr-guard/). You can also have a look at this [code sandbox](https://codesandbox.io/embed/serverless-moon-fl5tc?fontsize=14&hidenavigation=1&theme=dark) to see a minimal example.
+You can have a look at the [guide](https://voltra.github.io/vue-gdpr-guard/).
+You can also have a look at this [code sandbox](https://codesandbox.io/embed/serverless-moon-fl5tc?fontsize=14&hidenavigation=1&theme=dark) to see a minimal example.
 
 
 
@@ -67,11 +72,16 @@ import { VueGdprGuard } from "vue-gdpr-guard"
 import { GdprManagerBuilder } from "gdpr-guard"  
 import Vue from "vue"
 
-const manager = GdprManagerBuilder.make()
+const factory = () => GdprManagerBuilder.make()
 	// [...]
 .build();
 
-Vue.use(VueGdprGuard, { manager });
+const savior = /* get/create a GdprSavior */;
+
+Vue.use(VueGdprGuard, {
+    factory,
+    savior,
+});
 
 // mount app
 ```
@@ -88,4 +98,29 @@ Vue.use(VueGdprGuard, { manager });
 
 ### Helpers
 
-`VueGdprGuard` is the vue plugin to register in order to use the library. Note that it requires a `manager` in its installation options.
+`VueGdprGuard` is the vue plugin to register in order to use the library.
+Note that it requires a `factory` as well as a `savior` in its installation options.
+
+### Mixin
+
+`gdprMixin` gives access to logic to handle the "options screen" in your app:
+```typescript
+// interface that describes the mixin
+interface gdprMixin{
+    components: {
+        GdprManager: typeof GdprManager,
+        GdprGroup: typeof GdprGroup,
+        GdprGuard: typeof GdprGuard,
+    },
+    props: {
+        opened?: bool, // defaults to false
+    },
+    methods: {
+        enableAll: () => any,
+        disableAll: () => any,
+        close: () => any,
+        discard: () => Promise<boolean>,
+        save: () => Promise<boolean>,
+    },
+}
+```

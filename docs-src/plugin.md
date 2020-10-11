@@ -14,19 +14,24 @@ The plugin does not automatically register the components
 
 ​	
 
-To register the plugin, first you must create/get an instance of [`GdprManager`](https://voltra.github.io/gdpr-guard/classes/gdprmanager.html). Once you've got your instance, you can pass it into the plugin's registration options object :
+To register the plugin, first you must provide a [`GdprManagerFactory`](https://voltra.github.io/gdpr-guard/globals.html#gdprmanagerfactory) as well as a [`GdprSavior`](https://voltra.github.io/gdpr-guard/interfaces/gdprsavior.html). Once you've got  both, you can pass them into the plugin's registration options object :
 
 ```javascript
 import Vue from "vue"
 import { VueGdprGuard } from "vue-gdpr-guard"
 import { GdprManagerBuilder, GdprStorage } from "gdpr-guard"
 
-const manager = restoreGdprManagerOrCreate(() => {
+const savior = /* [...] */;
+
+const factory = () => {
     return GdprManagerBuilder.make()
     	// [...]
     .build();
-});
+};
 
-Vue.use(VueGdprGuard, { manager });
+Vue.use(VueGdprGuard, {
+    factory,
+    savior,
+});
 ```
 

@@ -31,18 +31,8 @@
             "groups",
         ],
         provide(){
-            const groupSlot = (this.$scopedSlots && "default" in this.$scopedSlots)
-            ? (...args) => this.$renderless(...args)
-            : () => null;
-
-            return {
-                group: this.group,
-                guards: this.group.guards,
-                groupSlot,
-                recursiveGuard: this.recursive,
-                $gdprGroup: this,
-            };
-        },
+        	return this.provided;
+		},
         data(){
             return {
                 toggle: this.toggleForItem(this.group),
@@ -54,6 +44,20 @@
             hasGroups(){
                 return "groups" in this.group;
             },
+			provided(){
+				const groupSlot = (this.$scopedSlots && "default" in this.$scopedSlots)
+					? (...args) => this.$renderless(...args)
+					: () => null;
+
+				return {
+					group: this.group,
+					guards: this.group.guards,
+					groupSlot,
+					recursiveGuard: this.recursive,
+					$gdprGroup: this,
+				};
+
+			},
         },
     }
 </script>

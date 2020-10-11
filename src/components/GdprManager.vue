@@ -4,8 +4,7 @@
     export default {
         render(){
             return this.$renderless({
-                groups: this.manager.groups,
-                manager: this.manager,
+				...this.provided,
 
                 toggleManager: this.toggle,
                 enableManager: this.enable,
@@ -26,17 +25,22 @@
 
                 onGdprChange: () => {
                     // this.$deepmerge(this.manager, this.$gdpr.raw());
-                    this.manager = this.$gdpr.raw();
+					this.manager = this.$gdpr.raw();
                 },
             };
         },
+		computed: {
+			provided(){
+				return {
+					manager: this.manager,
+					groups: this.manager.groups,
+				};
+			}
+		},
         provide(){
-            return {
-                manager: this.manager,
-                groups: this.manager.groups,
-            }
+            return this.provided; 
         },
-        created(){
+        mounted(){
             this.$gdpr.$on("change", this.onGdprChange);
         },
         beforeDestroy(){

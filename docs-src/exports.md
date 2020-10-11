@@ -3,6 +3,7 @@
 ```js
 import {
     VueGdprGuard,
+    gdprMixin,
     
     GdprManager,
     GdprGroup,
@@ -22,7 +23,8 @@ Vue.use(VueGdprGuard, config);
 
 | Config key | type                                                         | required           |
 | ---------- | ------------------------------------------------------------ | ------------------ |
-| manager    | [`gdprGuard.GdprManager`](https://voltra.github.io/gdpr-guard/classes/gdprmanager.html) | :heavy_check_mark: |
+| factory    | [`gdprGuard.GdprManagerFactory`](https://voltra.github.io/gdpr-guard/globals.html#gdprmanagerfactory) | :heavy_check_mark: |
+| savior     | [`gdprGuard.GdprSavior`](https://voltra.github.io/gdpr-guard/interfaces/gdprsavior.html) | :heavy_check_mark: |
 
 :::tip
 
@@ -36,9 +38,31 @@ import {
 } from "gdpr-guard"
 ```
 
-
+As for factories, you can either construct the manager beforehand and make a simple function that returns it, or make a function that constructs it directly.
 
 :::
+
+
+
+:::warning
+
+`GdprSavior` instances are often objects that you construct using other libraries (e.g. [gdpr-guard-local](https://raw.githubusercontent.com/Voltra/vue-gdpr-guard/dev/vue-gdpr-guard.png)). Thus you might need to install additional libraries for this feature.
+
+::::
+
+
+
+## gdprMixin
+
+A handy mixin if you define all your GDPR template in one component. It registers all the components of this library, adds a `opened` boolean prop and a handful of handy methods to avoid boilerplate :
+
+| Method         | Return type        | Description                                   |
+| -------------- | ------------------ | --------------------------------------------- |
+| `enableAll()`  | `void`             | Enable all guards in the manager              |
+| `disableAll()` | `void`             | Disable all guards in the manager             |
+| `close()`      | `void`             | Emit a `close` event (useful for modals)      |
+| `discard()`    | `Promise<boolean>` | Discard the user's changes to the preferences |
+| `save()`       | `Promise<boolean>` | Save the user's changes to the preferences    |
 
 
 
