@@ -38,7 +38,7 @@ const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue{
      * @returns {ManagerWrapper}
      */
     $emitEvent(event, ...args){
-		console.log(`Emitting "${event}"`);
+		// console.log(`Emitting "${event}"`);
 		this.$emit("change", ...args);
         this.$emit(event, ...args);
         return this;
