@@ -1,7 +1,7 @@
-import GdprManager from "../components/GdprManager"
-import GdprGroup from "../components/GdprGroup"
-import GdprGuard from "../components/GdprGuard"
-import VueTypes from "vue-types"
+import GdprManager from "../components/GdprManager";
+import GdprGroup from "../components/GdprGroup";
+import GdprGuard from "../components/GdprGuard";
+import VueTypes from "vue-types";
 
 
 const gdprMixin = {
@@ -40,9 +40,9 @@ const gdprMixin = {
 			const didStore = await this.$gdpr_savior.storeIfNotExists(this.$gdpr.raw());
 
 			if(!didStore)
-				throw new Error("Failed to store GDPR preferences");
+			{throw new Error("Failed to store GDPR preferences");}
 			else
-				return didStore;
+			{return didStore;}
 		},
 		/**
 		 * Save preferences modifications
@@ -52,13 +52,13 @@ const gdprMixin = {
 			const didStore = await this.$gdpr_savior.store(this.$gdpr.raw());
 
 			if(!didStore)
-				throw new Error("Failed to save GDPR preferences");
+			{throw new Error("Failed to save GDPR preferences");}
 			else
-				return didStore;
+			{return didStore;}
 		},
 	},
 };
 
 export {
 	gdprMixin,
-}
+};

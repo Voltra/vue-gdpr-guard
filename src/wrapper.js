@@ -3,19 +3,19 @@
  * @param {typeof import("vue")} Vue
  */
 const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue{
-    /**
+	/**
      * Construct a manager wrapper from the gdpr manager
      * @param {import("gdpr-guard/dist/GdprManager").GdprManager} manager
      */
-    constructor(manager){
-        super({
+	constructor(manager){
+		super({
 			data: {
 				manager,
 			},
 		});
 
 		this.hotswap(manager);
-    }
+	}
 
 	/**
 	 * Swap the wrapped manager on the fly
@@ -29,7 +29,7 @@ const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue{
 		return oldManager || null;
 	}
 
-    /**
+	/**
      * Emit a wrapper event
      * @protected
      * @ignore
@@ -37,91 +37,91 @@ const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue{
      * @param  {...any} args Arguments to pass
      * @returns {ManagerWrapper}
      */
-    $emitEvent(event, ...args){
+	$emitEvent(event, ...args){
 		// console.log(`Emitting "${event}"`);
 		this.$emit("change", ...args);
-        this.$emit(event, ...args);
-        return this;
-    }
+		this.$emit(event, ...args);
+		return this;
+	}
 
-    /**
+	/**
      * Get the raw representation of the wrapped manager
      * @returns {import("gdpr-guard/dist/GdprManager").GdprManagerRaw}
      */
-    raw(){
-        return this.manager.raw();
-    }
+	raw(){
+		return this.manager.raw();
+	}
 
-    /**
+	/**
      * @alias {ManagerWrapper#raw}
      */
-    json(){
-        return this.raw();
-    }
+	json(){
+		return this.raw();
+	}
 
-    toString(){
-        return JSON.stringify(this.json());
-    }
+	toString(){
+		return JSON.stringify(this.json());
+	}
 
-    _wrap(method, target = null, ...args){
-        if(target === null){
-            this.manager[method](...args);
-            return this.$emitEvent(method, ...args);
-        }
+	_wrap(method, target = null, ...args){
+		if(target === null){
+			this.manager[method](...args);
+			return this.$emitEvent(method, ...args);
+		}
 
-        if(this.hasGuard(target)){
-            this.getGuard(target)[method](...args);
-            return this.$emitEvent(method, ...args);
-        }
+		if(this.hasGuard(target)){
+			this.getGuard(target)[method](...args);
+			return this.$emitEvent(method, ...args);
+		}
 
-        return this;
-    }
+		return this;
+	}
 
-    disable(target = null){
-        return this._wrap("disable", target);
-    }
+	disable(target = null){
+		return this._wrap("disable", target);
+	}
 
-    enable(target = null){
-        return this._wrap("enable", target);
-    }
+	enable(target = null){
+		return this._wrap("enable", target);
+	}
 
-    toggle(target = null){
-        return this._wrap("toggle", target);
-    }
+	toggle(target = null){
+		return this._wrap("toggle", target);
+	}
 
-    disableForStorage(storage, target = null){
-        return this._wrap("disableForStorage", target, storage);
-    }
+	disableForStorage(storage, target = null){
+		return this._wrap("disableForStorage", target, storage);
+	}
 
-    enableForStorage(storage, target = null){
-        return this._wrap("enableForStorage", target, storage);
-    }
+	enableForStorage(storage, target = null){
+		return this._wrap("enableForStorage", target, storage);
+	}
 
-    toggleForStorage(storage, target = null){
-        return this._wrap("toggleForStorage", target, storage);
-    }
+	toggleForStorage(storage, target = null){
+		return this._wrap("toggleForStorage", target, storage);
+	}
 
-    isEnabled(name){
-        return this.manager.isEnabled(name);
-    }
+	isEnabled(name){
+		return this.manager.isEnabled(name);
+	}
 
-    hasGroup(groupName){
-        return this.manager.hasGroup(groupName);
-    }
+	hasGroup(groupName){
+		return this.manager.hasGroup(groupName);
+	}
 
-    hasGuard(guardName){
-        return this.manager.hasGuard(guardName);
-    }
+	hasGuard(guardName){
+		return this.manager.hasGuard(guardName);
+	}
 
-    getGroup(groupName){
-        return this.manager.getGroup(groupName);
-    }
+	getGroup(groupName){
+		return this.manager.getGroup(groupName);
+	}
 
-    getGuard(guardName){
-        return this.manager.getGuard(guardName);
-    }
+	getGuard(guardName){
+		return this.manager.getGuard(guardName);
+	}
 };
 
 export {
-    ManagerWrapperFactory,
-}
+	ManagerWrapperFactory,
+};
