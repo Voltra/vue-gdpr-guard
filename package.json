@@ -1,7 +1,7 @@
 {
 	"main": "dist/vue-gdpr-guard.umd.js",
 	"name": "vue-gdpr-guard",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"license": "MIT",
 	"keywords": [
 		"vue",
@@ -16,7 +16,7 @@
 	"scripts": {
 		"serve": "vue-cli-service build",
 		"build:lib": "vue-cli-service build --target lib --name vueGdprGuard --filename vue-gdpr-guard src/main.js",
-		"lint": "vue-cli-service lint",
+		"lint": "eslint ./src/**/*.{js,vue} --fix",
 		"docs": "vuepress build docs-src",
 		"watch:docs": "vuepress dev docs-src"
 	},
@@ -34,7 +34,8 @@
 		"@vue/cli-plugin-eslint": "^4.5.14",
 		"@vue/cli-service": "^4.5.14",
 		"core-js": "^3.18.3",
-		"eslint": "^6.2.2",
+		"eslint": "^6.2.0",
+		"eslint-loader": "^4.0.2",
 		"eslint-plugin-vue": "^7.20.0",
 		"vue": "^2.6.14",
 		"vue-template-compiler": "^2.6.14",
