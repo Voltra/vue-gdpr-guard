@@ -11,34 +11,28 @@ const assertCorrectOptions = options => {
 		throw new Error(`[VueGdprGuard] ${msg}`);
 	};
 
-	if(typeof options !== "object")
-	{fail("Invalid options (must be an object)");}
+	if (typeof options !== "object") { fail("Invalid options (must be an object)"); }
 
-	if(!options)
-	{fail("No options were provided");}
+	if (!options) { fail("No options were provided"); }
 
-	if(!("factory" in options))
-	{fail("Missing `factory` option");}
+	if (!("factory" in options)) { fail("Missing `factory` option"); }
 
-	if(typeof options.factory !== "function")
-	{fail("`factory` must be a function (that returns a GdprManager)");}
+	if (typeof options.factory !== "function") { fail("`factory` must be a function (that returns a GdprManager)"); }
 
-	if(!("savior" in options))
-	{fail("Missing `savior` option");}
+	if (!("savior" in options)) { fail("Missing `savior` option"); }
 
-	if(typeof options.savior !== "object" || !options.savior)
-	{fail("`savior` must be an instance of GdprSavior");}
+	if (typeof options.savior !== "object" || !options.savior) { fail("`savior` must be an instance of GdprSavior"); }
 };
 
 const VueGdprGuard = {
 	/**
-     * @type {import("vue/types/plugin").PluginFunction}
+	 * @type {import("vue/types/plugin").PluginFunction}
 	 * @param {{
 	 *	factory: import("gdpr-guard/dist/serde/GdprSavior").GdprManagerFactory,
 	 *	savior: import("gdpr-guard/dist/serde/GdprSavior").GdprSavior
 	 * }} options
-     */
-	install(Vue, options){
+	 */
+	install(Vue, options) {
 		assertCorrectOptions(options);
 		const {
 			factory,
@@ -47,13 +41,15 @@ const VueGdprGuard = {
 
 		const vueSavior = new VueSavior(Vue, savior);
 		const ManagerWrapper = ManagerWrapperFactory(Vue);
-       
-		const desc = val => {return {
-			value: val,
-			configurable: false,
-			enumerable: true,
-			writable: false,
-		};};
+
+		const desc = val => {
+			return {
+				value: val,
+				configurable: false,
+				enumerable: true,
+				writable: false,
+			};
+		};
 
 		const installTargets = [
 			Vue,

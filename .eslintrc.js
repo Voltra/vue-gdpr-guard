@@ -52,6 +52,15 @@ module.exports = {
 		],
 		"semi": ["error", "always"],
 		"quote-props": ["error", "as-needed"],
+		"nonblock-statement-body-position": [
+			"error",
+			"below",
+			{
+				overrides: {
+					do: "any",
+				},
+			},
+		],
 		// [/JS]
 
 
