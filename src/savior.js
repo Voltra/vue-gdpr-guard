@@ -1,6 +1,6 @@
 import { GdprSaviorAdapter } from "gdpr-guard";
 
-class VueSavior extends GdprSaviorAdapter {
+export class VueSavior extends GdprSaviorAdapter {
 	/**
 	 * Wrap a GdprSavior in a VueSavior
 	 * @param {(typeof Vue)|Vue} Vue - The Vue class (or instance) in use
@@ -68,7 +68,3 @@ class VueSavior extends GdprSaviorAdapter {
 		return this.savior.storeIfNotExists(manager);
 	}
 }
-
-export {
-	VueSavior,
-};

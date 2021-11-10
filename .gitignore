@@ -1,6 +1,7 @@
 yarn.lock
 .DS_Store
 node_modules
+tmp
 
 # local env files
 .env.local

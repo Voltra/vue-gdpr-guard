@@ -1,5 +1,6 @@
 {
 	"main": "dist/vue-gdpr-guard.umd.js",
+	"types": "types/index.d.ts",
 	"name": "vue-gdpr-guard",
 	"version": "2.0.1",
 	"license": "MIT",

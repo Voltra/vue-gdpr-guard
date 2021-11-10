@@ -24,13 +24,9 @@ const assertCorrectOptions = options => {
 	if (typeof options.savior !== "object" || !options.savior) { fail("`savior` must be an instance of GdprSavior"); }
 };
 
-const VueGdprGuard = {
+export const VueGdprGuard = {
 	/**
-	 * @type {import("vue/types/plugin").PluginFunction}
-	 * @param {{
-	 *	factory: import("gdpr-guard/dist/serde/GdprSavior").GdprManagerFactory,
-	 *	savior: import("gdpr-guard/dist/serde/GdprSavior").GdprSavior
-	 * }} options
+	 * @param {import("../types").VueGdprGuardPluginOptions} options
 	 */
 	install(Vue, options) {
 		assertCorrectOptions(options);
@@ -88,7 +84,6 @@ const VueGdprGuard = {
 };
 
 export {
-	VueGdprGuard,
 	gdprMixin,
 
 	GdprManager,
