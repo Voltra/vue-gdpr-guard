@@ -2,7 +2,7 @@
 	"main": "dist/vue-gdpr-guard.umd.js",
 	"types": "types/index.d.ts",
 	"name": "vue-gdpr-guard",
-	"version": "2.0.1",
+	"version": "2.1.0",
 	"license": "MIT",
 	"keywords": [
 		"vue",
@@ -22,7 +22,7 @@
 		"watch:docs": "vuepress dev docs-src"
 	},
 	"dependencies": {
-		"gdpr-guard": "^2.1.0",
+		"gdpr-guard": "^2.1.1",
 		"vue-types": "^4.1.1"
 	},
 	"bugs": {
@@ -30,12 +30,12 @@
 	},
 	"homepage": "https://github.com/Voltra/vue-gdpr-guard#readme",
 	"devDependencies": {
-		"@babel/eslint-parser": "^7.15.8",
-		"@vue/cli-plugin-babel": "^4.5.14",
-		"@vue/cli-plugin-eslint": "^4.5.14",
-		"@vue/cli-service": "^4.5.14",
-		"core-js": "^3.18.3",
-		"eslint": "^6.2.0",
+		"@babel/eslint-parser": "^7.16.3",
+		"@vue/cli-plugin-babel": "^4.5.15",
+		"@vue/cli-plugin-eslint": "^4.5.15",
+		"@vue/cli-service": "^4.5.15",
+		"core-js": "^3.19.1",
+		"eslint": "^6.8.0",
 		"eslint-loader": "^4.0.2",
 		"eslint-plugin-vue": "^7.20.0",
 		"vue": "^2.6.14",
