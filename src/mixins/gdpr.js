@@ -30,6 +30,7 @@ export const gdprMixin = {
 		 */
 		close() {
 			this.$emit("close");
+			this.$gdpr.manager.closeBanner();
 		},
 		/**
 		 * Discard preferences modifications
@@ -38,8 +39,11 @@ export const gdprMixin = {
 		async discard() {
 			const didStore = await this.$gdpr_savior.storeIfNotExists(this.$gdpr.raw());
 
-			if (!didStore) { throw new Error("Failed to store GDPR preferences"); }
-			else { return didStore; }
+			if (!didStore) {
+				throw new Error("Failed to store GDPR preferences");
+			} else {
+				return didStore;
+			}
 		},
 		/**
 		 * Save preferences modifications
@@ -48,8 +52,12 @@ export const gdprMixin = {
 		async save() {
 			const didStore = await this.$gdpr_savior.store(this.$gdpr.raw());
 
-			if (!didStore) { throw new Error("Failed to save GDPR preferences"); }
-			else { return didStore; }
+			if (!didStore) {
+				throw new Error("Failed to save GDPR preferences");
+			} else {
+				this.$gdpr.closeBanner();
+				return didStore;
+			}
 		},
 	},
 };

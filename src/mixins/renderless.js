@@ -1,6 +1,6 @@
 export default {
 	methods: {
-		$renderless(props = {}, slot = "default"){
+		$renderless(props = {}, slot = "default") {
 			return this.$scopedSlots[slot](props)[0];
 		},
 	},

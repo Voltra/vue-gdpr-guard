@@ -19,10 +19,12 @@
 		"build:lib": "vue-cli-service build --target lib --name vueGdprGuard --filename vue-gdpr-guard src/main.js",
 		"lint": "eslint ./src/**/*.{js,vue} --fix",
 		"docs": "vuepress build docs-src",
-		"watch:docs": "vuepress dev docs-src"
+		"watch:docs": "vuepress dev docs-src",
+		"predeploy:docs": "npm run docs",
+		"deploy:docs": "gh-pages -d docs"
 	},
 	"dependencies": {
-		"gdpr-guard": "^2.1.1",
+		"gdpr-guard": "^2.2.1",
 		"vue-types": "^4.1.1"
 	},
 	"bugs": {

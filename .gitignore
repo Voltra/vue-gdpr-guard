@@ -2,6 +2,7 @@ yarn.lock
 .DS_Store
 node_modules
 tmp
+docs/
 
 # local env files
 .env.local

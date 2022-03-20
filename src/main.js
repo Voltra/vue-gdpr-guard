@@ -1,32 +1,45 @@
-import { ManagerWrapperFactory } from "./wrapper";
+import { managerWrapperClassFactory } from "./wrapper";
 import { VueSavior } from "./savior";
 import { gdprMixin } from "./mixins/gdpr";
 import GdprManager from "./components/GdprManager.vue";
 import GdprGroup from "./components/GdprGroup.vue";
 import GdprGuard from "./components/GdprGuard.vue";
-import { GdprStorage, GdprManager as GManager } from "gdpr-guard";
+import { GdprManager as GManager, GdprStorage } from "gdpr-guard";
 
 const assertCorrectOptions = options => {
 	const fail = msg => {
 		throw new Error(`[VueGdprGuard] ${msg}`);
 	};
 
-	if (typeof options !== "object") { fail("Invalid options (must be an object)"); }
+	if (typeof options !== "object") {
+		fail("Invalid options (must be an object)");
+	}
 
-	if (!options) { fail("No options were provided"); }
+	if (!options) {
+		fail("No options were provided");
+	}
 
-	if (!("factory" in options)) { fail("Missing `factory` option"); }
+	if (!("factory" in options)) {
+		fail("Missing `factory` option");
+	}
 
-	if (typeof options.factory !== "function") { fail("`factory` must be a function (that returns a GdprManager)"); }
+	if (typeof options.factory !== "function") {
+		fail("`factory` must be a function (that returns a GdprManager)");
+	}
 
-	if (!("savior" in options)) { fail("Missing `savior` option"); }
+	if (!("savior" in options)) {
+		fail("Missing `savior` option");
+	}
 
-	if (typeof options.savior !== "object" || !options.savior) { fail("`savior` must be an instance of GdprSavior"); }
+	if (typeof options.savior !== "object" || !options.savior) {
+		fail("`savior` must be an instance of GdprSavior");
+	}
 };
 
 export const VueGdprGuard = {
 	/**
-	 * @param {import("../types").VueGdprGuardPluginOptions} options
+	 * @param {import("vue/types").VueConstructor} Vue
+	 * @param {import("../types/plugin").VueGdprGuardPluginOptions} options
 	 */
 	install(Vue, options) {
 		assertCorrectOptions(options);
@@ -36,7 +49,7 @@ export const VueGdprGuard = {
 		} = options;
 
 		const vueSavior = new VueSavior(Vue, savior);
-		const ManagerWrapper = ManagerWrapperFactory(Vue);
+		const ManagerWrapper = managerWrapperClassFactory(Vue);
 
 		const desc = val => {
 			return {
