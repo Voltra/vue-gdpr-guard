@@ -1,7 +1,7 @@
-import type { GdprStorage } from "gdpr-guard";
+import type { GdprStorage } from "gdpr-guard/dist/gdpr_guard";
 import type { ManagerWrapper, VueSavior } from "./classes"
 import type { VueGdprGuardPlugin } from "./plugin";
-import type { GdprManagerComponent, GdprGroupComponent, GdprGuardComponent } from "./components"
+import type { GdprGroupComponent, GdprGuardComponent, GdprManagerComponent } from "./components"
 import type { GdprMixin } from "./mixins";
 
 export * from "./helpers";
@@ -24,12 +24,8 @@ declare module "vue/types/vue" {
 	}
 }
 
-// declare module "vue-gdpr-guard" {
-
 export declare const VueGdprGuard: VueGdprGuardPlugin;
 export declare const GdprManager: GdprManagerComponent;
 export declare const GdprGroup: GdprGroupComponent;
 export declare const GdprGuard: GdprGuardComponent;
 export declare const gdprMixin: GdprMixin;
-
-// }
