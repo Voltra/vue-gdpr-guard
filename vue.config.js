@@ -1,13 +1,4 @@
 module.exports = {
-	lintOnSave: false,
+	lintOnSave: true,
 	parallel: true,
-	chainWebpack(config) {
-		config.module
-			.rule("eslint")
-			.use("eslint-loader")
-			.loader("eslint-loader")
-			.options({
-				fix: true,
-			}).end();
-	},
 };
