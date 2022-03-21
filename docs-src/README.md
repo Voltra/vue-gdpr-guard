@@ -14,7 +14,7 @@ This is the complete guide for using [vue-gdpr-guard](https://npmjs.com/package/
 
 ::: tip
 
-If you wish to know how to use the gdpr-guard library itself, refer to its [official documentation](https://voltra.github.io/gdpr-guard).
+If you wish to know how to use the gdpr-guard library itself, refer to its [official documentation](https://voltra.github.io/gdpr-guard)
 
 :::
 

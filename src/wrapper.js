@@ -2,10 +2,10 @@
  * Create the class that wraps a manager
  * @param {typeof import("vue")} Vue
  */
-export const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue {
+export const managerWrapperClassFactory = Vue => class ManagerWrapper extends Vue {
 	/**
 	 * Construct a manager wrapper from the gdpr manager
-	 * @param {import("gdpr-guard/dist/GdprManager").GdprManager} manager
+	 * @param {import("gdpr-guard/dist/GdprManager").GdprManager} manager - The manager to wrap
 	 */
 	constructor(manager) {
 		super({
@@ -15,12 +15,16 @@ export const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue {
 		});
 
 		this.hotswap(manager);
+
+		/**
+		 * @property {import("gdpr-guard/dist/GdprManager").GdprManager} this.manager
+		 */
 	}
 
 	/**
 	 * Swap the wrapped manager on the fly
 	 * @param {import("gdpr-guard/dist/GdprManager").GdprManager} manager
-	 * @returns {import("gdpr-guard/dist/GdprManager").GdprManager|null}
+	 * @returns {import("gdpr-guard/dist/GdprManager").GdprManager|null} The previous manager
 	 */
 	hotswap(manager) {
 		const oldManager = this.manager;
@@ -119,5 +123,20 @@ export const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue {
 
 	getGuard(guardName) {
 		return this.manager.getGuard(guardName);
+	}
+
+	closeBanner() {
+		return this.manager.closeBanner();
+	}
+
+	resetAndShowBanner() {
+		return this.manager.resetAndShowBanner();
+	}
+
+	/**
+	 * @returns {import("gdpr-guard/dist/GdprManagerEventHub").GdprManagerEventHub}
+	 */
+	getEventsHub() {
+		return this.manager.events;
 	}
 };

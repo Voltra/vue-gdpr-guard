@@ -3,10 +3,13 @@ import Vue from "vue";
 import type { OptionalGdprTarget, GdprTarget } from "../helpers"
 
 export declare class ManagerWrapper extends Vue {
-	constructor(protected manager: GdprManager);
+	public manager: GdprManager;
+
+	constructor(manager: GdprManager);
 
 	/**
 	 * Swap the wrapped manager on the fly
+	 * @returns The previous manager
 	 */
 	hotswap(manager: GdprManager): GdprManager | null;
 
@@ -92,4 +95,17 @@ export declare class ManagerWrapper extends Vue {
 	 * Retrieve the group that has the given {@link guardName}
 	 */
 	getGuard(guardName: GdprTarget): ReturnType<GdprManager["getGuard"]>;
+
+
+	/**
+	 * Close the banner and process enable/disable hooks
+	 */
+	closeBanner(): void;
+
+	resetAndShowBanner(): void;
+
+	/**
+	 * @returns {import("gdpr-guard/dist/GdprManagerEventHub").GdprManagerEventHub}
+	 */
+	getEventsHub();
 }

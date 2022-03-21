@@ -3,17 +3,19 @@
 This component exposes the group's state contained within the `group` prop. It also exposes the child `guards` that are meant to be used to render [GdprGuard](/components/GdprGuard) components.
 
 ```vue
-<GdprGroup :group="g" slot-scope="{ group, guards, toggleGroup }">
-	{{ group.name }}
-    
-    <MyAwesomeSwitch
-    	@change="toggleGroup"
-    	:value="group.enabled"
-    	:disabled="group.required"/>
-    
-    <GdprGuard v-for="g in guards">
-    	<!-- [...] -->
-    </GdprGuard>
+<GdprGroup :group="g">
+	<template #default="{ group, guards, toggleGroup }">
+		{{ group.name }}
+
+		<MyAwesomeSwitch
+			@change="toggleGroup"
+			:value="group.enabled"
+			:disabled="group.required"/>
+
+		<GdprGuard v-for="g in guards">
+			<!-- [...] -->
+		</GdprGuard>
+	</template>
 </GdprGroup>
 ```
 
