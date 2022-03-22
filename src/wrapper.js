@@ -2,12 +2,12 @@
  * Create the class that wraps a manager
  * @param {typeof import("vue")} Vue
  */
-const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue{
+export const managerWrapperClassFactory = Vue => class ManagerWrapper extends Vue {
 	/**
-     * Construct a manager wrapper from the gdpr manager
-     * @param {import("gdpr-guard/dist/GdprManager").GdprManager} manager
-     */
-	constructor(manager){
+	 * Construct a manager wrapper from the gdpr manager
+	 * @param {import("gdpr-guard/dist/GdprManager").GdprManager} manager - The manager to wrap
+	 */
+	constructor(manager) {
 		super({
 			data: {
 				manager,
@@ -15,14 +15,18 @@ const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue{
 		});
 
 		this.hotswap(manager);
+
+		/**
+		 * @property {import("gdpr-guard/dist/GdprManager").GdprManager} this.manager
+		 */
 	}
 
 	/**
 	 * Swap the wrapped manager on the fly
 	 * @param {import("gdpr-guard/dist/GdprManager").GdprManager} manager
-	 * @returns {import("gdpr-guard/dist/GdprManager").GdprManager|null}
+	 * @returns {import("gdpr-guard/dist/GdprManager").GdprManager|null} The previous manager
 	 */
-	hotswap(manager){
+	hotswap(manager) {
 		const oldManager = this.manager;
 		Vue.set(this, "manager", manager);
 		this.$emitEvent("hotswap");
@@ -30,14 +34,14 @@ const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue{
 	}
 
 	/**
-     * Emit a wrapper event
-     * @protected
-     * @ignore
-     * @param {string} event Event name
-     * @param  {...any} args Arguments to pass
-     * @returns {ManagerWrapper}
-     */
-	$emitEvent(event, ...args){
+	 * Emit a wrapper event
+	 * @protected
+	 * @ignore
+	 * @param {string} event Event name
+	 * @param  {...any} args Arguments to pass
+	 * @returns {ManagerWrapper}
+	 */
+	$emitEvent(event, ...args) {
 		// console.log(`Emitting "${event}"`);
 		this.$emit("change", ...args);
 		this.$emit(event, ...args);
@@ -45,31 +49,31 @@ const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue{
 	}
 
 	/**
-     * Get the raw representation of the wrapped manager
-     * @returns {import("gdpr-guard/dist/GdprManager").GdprManagerRaw}
-     */
-	raw(){
+	 * Get the raw representation of the wrapped manager
+	 * @returns {import("gdpr-guard/dist/GdprManager").GdprManagerRaw}
+	 */
+	raw() {
 		return this.manager.raw();
 	}
 
 	/**
-     * @alias {ManagerWrapper#raw}
-     */
-	json(){
+	 * @alias {ManagerWrapper#raw}
+	 */
+	json() {
 		return this.raw();
 	}
 
-	toString(){
+	toString() {
 		return JSON.stringify(this.json());
 	}
 
-	_wrap(method, target = null, ...args){
-		if(target === null){
+	_wrap(method, target = null, ...args) {
+		if (target === null) {
 			this.manager[method](...args);
 			return this.$emitEvent(method, ...args);
 		}
 
-		if(this.hasGuard(target)){
+		if (this.hasGuard(target)) {
 			this.getGuard(target)[method](...args);
 			return this.$emitEvent(method, ...args);
 		}
@@ -77,51 +81,62 @@ const ManagerWrapperFactory = Vue => class ManagerWrapper extends Vue{
 		return this;
 	}
 
-	disable(target = null){
+	disable(target = null) {
 		return this._wrap("disable", target);
 	}
 
-	enable(target = null){
+	enable(target = null) {
 		return this._wrap("enable", target);
 	}
 
-	toggle(target = null){
+	toggle(target = null) {
 		return this._wrap("toggle", target);
 	}
 
-	disableForStorage(storage, target = null){
+	disableForStorage(storage, target = null) {
 		return this._wrap("disableForStorage", target, storage);
 	}
 
-	enableForStorage(storage, target = null){
+	enableForStorage(storage, target = null) {
 		return this._wrap("enableForStorage", target, storage);
 	}
 
-	toggleForStorage(storage, target = null){
+	toggleForStorage(storage, target = null) {
 		return this._wrap("toggleForStorage", target, storage);
 	}
 
-	isEnabled(name){
+	isEnabled(name) {
 		return this.manager.isEnabled(name);
 	}
 
-	hasGroup(groupName){
+	hasGroup(groupName) {
 		return this.manager.hasGroup(groupName);
 	}
 
-	hasGuard(guardName){
+	hasGuard(guardName) {
 		return this.manager.hasGuard(guardName);
 	}
 
-	getGroup(groupName){
+	getGroup(groupName) {
 		return this.manager.getGroup(groupName);
 	}
 
-	getGuard(guardName){
+	getGuard(guardName) {
 		return this.manager.getGuard(guardName);
 	}
-};
 
-export {
-	ManagerWrapperFactory,
+	closeBanner() {
+		return this.manager.closeBanner();
+	}
+
+	resetAndShowBanner() {
+		return this.manager.resetAndShowBanner();
+	}
+
+	/**
+	 * @returns {import("gdpr-guard/dist/GdprManagerEventHub").GdprManagerEventHub}
+	 */
+	getEventsHub() {
+		return this.manager.events;
+	}
 };

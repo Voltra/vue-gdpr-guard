@@ -1,21 +1,21 @@
 export default {
 	methods: {
-		toggleForItem({ name }){
+		toggleForItem({ name }) {
 			return () => this.$gdpr.toggle(name);
 		},
-		toggleItem(item){
+		toggleItem(item) {
 			this.toggleForItem(item)();
 		},
-		enableForItem({ name }){
+		enableForItem({ name }) {
 			return () => this.$gdpr.enable(name);
 		},
-		enableItem(item){
+		enableItem(item) {
 			this.enableForItem(item)();
 		},
-		disableForItem({ name }){
+		disableForItem({ name }) {
 			return () => this.$gdpr.disable(name);
 		},
-		disableItem(item){
+		disableItem(item) {
 			this.disableForItem(item)();
 		},
 	},

@@ -23,6 +23,7 @@ module.exports = {
                 next: "/components/GdprManager",
             },
             '/helpers',
+			'/in-depth',
         ],
     },
 };

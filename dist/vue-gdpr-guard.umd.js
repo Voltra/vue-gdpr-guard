@@ -1,4 +1,14 @@
-/******/ (function() { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["vueGdprGuard"] = factory();
+	else
+		root["vueGdprGuard"] = factory();
+})((typeof self !== 'undefined' ? self : this), function() {
+return /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
 /***/ 7679:
@@ -6372,7 +6382,7 @@ function _objectSpread2(target) {
     }
   }
 });
-;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40[0].rules[0].use[1]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/GdprManager.vue?vue&type=script&lang=js&
+;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-80[0].rules[0].use[1]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/GdprManager.vue?vue&type=script&lang=js&
 
 
 /* harmony default export */ var GdprManagervue_type_script_lang_js_ = ({
@@ -6588,7 +6598,7 @@ var es_function_name = __webpack_require__(8309);
     }
   }
 });
-;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40[0].rules[0].use[1]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/GdprGroup.vue?vue&type=script&lang=js&
+;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-80[0].rules[0].use[1]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/GdprGroup.vue?vue&type=script&lang=js&
 
 
 /* harmony default export */ var GdprGroupvue_type_script_lang_js_ = ({
@@ -6669,7 +6679,7 @@ var GdprGroup_component = normalizeComponent(
 )
 
 /* harmony default export */ var GdprGroup = (GdprGroup_component.exports);
-;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-40[0].rules[0].use[1]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/GdprGuard.vue?vue&type=script&lang=js&
+;// CONCATENATED MODULE: ./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib/index.js??clonedRuleSet-80[0].rules[0].use[1]!./node_modules/@vue/vue-loader-v15/lib/index.js??vue-loader-options!./src/components/GdprGuard.vue?vue&type=script&lang=js&
 
 
 
@@ -7054,7 +7064,8 @@ var VueGdprGuard = {
 
 
 }();
-module.exports = __webpack_exports__;
+/******/ 	return __webpack_exports__;
 /******/ })()
 ;
-//# sourceMappingURL=vue-gdpr-guard.common.js.map
+});
+//# sourceMappingURL=vue-gdpr-guard.umd.js.map
