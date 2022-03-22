@@ -3,55 +3,81 @@
 module.exports = {
 	root: true,
 	env: {
-		"node": true,
+		node: true,
 	},
-	"parserOptions": {
+	parserOptions: {
 		// "parser": "babel-eslint"
-		"parser": "@babel/eslint-parser",
+		parser: "@babel/eslint-parser",
 	},
-	"extends": [
+	extends: [
 		"plugin:vue/essential",
 		"plugin:vue/recommended",
 		"eslint:recommended",
 	],
-	"rules": {
+	rules: {
 		// [JS]
 		"arrow-body-style": [
-			"error", "as-needed", {
+			"error",
+			"as-needed",
+			{
 				requireReturnForObjectLiteral: true,
 			},
 		],
-		"curly": "error",
+		curly: "error",
 		"dot-notation": "error",
-		"eqeqeq": "error",
+		eqeqeq: "error",
 		"no-lonely-if": "error",
 		"no-return-await": "error",
 		"no-sequences": "error",
-		"array-bracket-newline": ["error", { multiline: true }],
-		"array-element-newline": ["error", {
-			multiline: true,
-			minItems: 1,
-		}],
-		"arrow-parens": ["error", "as-needed"],
+		"array-bracket-newline": [
+			"error",
+			{ multiline: true },
+		],
+		"array-element-newline": [
+			"error",
+			{
+				multiline: true,
+				minItems: 1,
+			},
+		],
+		"arrow-parens": [
+			"error",
+			"as-needed",
+		],
 		"comma-dangle": [
-			"error", "always-multiline", {
+			"error",
+			"always-multiline",
+			{
 				functions: "never",
 			},
 		],
-		"indent": [
-			"error", "tab", {
+		indent: [
+			"error",
+			"tab",
+			{
 				SwitchCase: 1,
 			},
 		],
-		"linebreak-style": ["error", "unix"],
-		"quotes": [
-			"error", "double", {
+		"linebreak-style": [
+			"error",
+			"unix",
+		],
+		quotes: [
+			"error",
+			"double",
+			{
 				allowTemplateLiterals: true,
 				avoidEscape: false,
 			},
 		],
-		"semi": ["error", "always"],
-		"quote-props": ["error", "as-needed"],
+		semi: [
+			"error",
+			"always",
+		],
+		"quote-props": [
+			"error",
+			"as-needed",
+		],
 		"nonblock-statement-body-position": [
 			"error",
 			"below",
@@ -66,17 +92,19 @@ module.exports = {
 
 		// [VUE]
 		"vue/script-indent": [
-			"error", "tab", {
+			"error",
+			"tab",
+			{
 				baseIndent: 1,
 			},
 		],
 	},
-	"overrides": [
+	overrides: [
 		{
-			"files": ["*.vue"],
-			"rules": {
-				"indent": "off"
-			}
-		}
+			files: ["*.vue"],
+			rules: {
+				indent: "off",
+			},
+		},
 	],
 };
