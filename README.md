@@ -20,46 +20,39 @@ MyComponent.vue
 ```vue
 <template>
 	<GdprManager>
-		<template #default="{ groups, enable, disable }">
-			<div class="gdpr-container">
-				<button @click="enable">Enable all</button>
-				<button @click="disable">Disable all</button>
-
-				<GdprGroup v-for="group in groups" :key="group.name">
-					<template #default="{ guards, toggle }">
-						<div class="gdpr-container group">
-						   <label>Group {{ group.name }}</label>
-						   <MyAwesomeSwitch
-								:label="`Toggle ${group.name}`"
-								 :value="group.enabled"
-								 @switch="toggle"/>
-
-							<GdprGuard v-for="guard in guards" :key="guard.name">
-								<template #default="{ toggle }">
-									<!--
-									By default, it will reuse the group slot above if there are
-									groups inside groups
-							  		-->
-									<div class="gdpr-item">
-										<label>{{ guard.name }}</label>
-										<MyAwesomeSwitch
-											:label="`Toggle ${guard.name}`"
-											:value="guard.enabled"
-											@switch="toggle"/>
-									</div>
-								</template>
-						   </GdprGuard>
-						</div>
-					</template>
-				</GdprGroup>
-			</div>
-		</template>
+    	<div class="gdpr-container" :slot-scope="{ groups, enable, disable }">
+            <button @click="enable">Enable all</button>
+            <button @click="disable">Disable all</button>
+        	
+            <GdprGroup v-for="group in groups" :key="group.name">
+            	<div class="gdpr-container group" :slot-scope="{ guards, toggle }">
+                   <label>Group {{ group.name }}</label>
+                   <MyAwesomeSwitch
+                   		:label="`Toggle ${group.name}`"
+                         :value="group.enabled"
+                         @switch="toggle"/>
+                    
+                    <GdprGuard v-for="guard in guards" :key="guard.name">
+                        <!-- By default, it will reuse the group slot above if there are
+							groups inside groups
+					  -->
+                        <div class="gdpr-item" :slot-scope="{ toggle }">
+                            <label>{{ guard.name }}</label>
+                            <MyAwesomeSwitch
+                            	:label="`Toggle ${guard.name}`"
+                                 :value="guard.enabled"
+                                 @switch="toggle"/>
+					  </div>
+    			   </GdprGuard>
+                </div>
+    		</GdprGroup>
+    	</div>
     </GdprManager>
 </template>
 
 <script>
 	import { GdprManager, GdprGroup, GdprGuard } from "vue-gdpr-guard"
-
+    
     export default {
         components: {
             GdprManager,
@@ -76,7 +69,7 @@ index.js
 
 ```javascript
 import { VueGdprGuard } from "vue-gdpr-guard"
-import { GdprManagerBuilder } from "gdpr-guard"
+import { GdprManagerBuilder } from "gdpr-guard"  
 import Vue from "vue"
 
 const factory = () => GdprManagerBuilder.make()
@@ -99,9 +92,7 @@ Vue.use(VueGdprGuard, {
 
 ### Components
 
-`GdprManager`, `GdprGroup` and `GdprGuard` are renderless vue components that are available to you to compose your UI.
-Note that these are not the classes from `gdpr-guard`, you can import these directly from that package
-(`vue-gdpr-guard` has it in its dependencies).
+`GdprManager`, `GdprGroup` and `GdprGuard` are renderless vue components that are available to you to compose your UI. Note that these are not the classes from `gdpr-guard`, you can import these directly from that package (`vue-gdpr-guard` has it in its dependencies).
 
 
 
