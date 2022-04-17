@@ -2,13 +2,19 @@
 	"main": "dist/vue-gdpr-guard.umd.js",
 	"types": "types/index.d.ts",
 	"name": "vue-gdpr-guard",
-	"version": "2.2.0",
+	"version": "2.2.1",
 	"license": "MIT",
 	"keywords": [
-		"vue",
 		"gdpr",
-		"rgpd",
-		"gdpr-guard"
+		"vue",
+		"components",
+		"cookies",
+		"cookie",
+		"notice",
+		"banner",
+		"consent",
+		"tracking",
+		"rgpd"
 	],
 	"repository": {
 		"type": "git",
@@ -16,7 +22,7 @@
 	},
 	"scripts": {
 		"serve": "vue-cli-service build",
-		"build:lib": "vue-cli-service build --target lib --name vueGdprGuard --filename vue-gdpr-guard src/main.js",
+		"build": "vue-cli-service build --target lib --name vueGdprGuard --filename vue-gdpr-guard src/main.js",
 		"lint": "eslint ./src/**/*.{js,vue} --fix",
 		"docs": "vuepress build docs-src",
 		"watch:docs": "vuepress dev docs-src",
@@ -47,6 +53,7 @@
 		"vue": "^2.6.0",
 		"vue-template-compiler": "^2.6.0",
 		"vuepress": "^1.9.7",
-		"vuepress-plugin-clean-urls": "^1.1.2"
+		"vuepress-plugin-clean-urls": "^1.1.2",
+		"webpack": "^4.0.0"
 	}
 }
