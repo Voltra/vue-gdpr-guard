@@ -7,7 +7,7 @@
 		exports["vueGdprGuard"] = factory();
 	else
 		root["vueGdprGuard"] = factory();
-})((typeof self !== 'undefined' ? self : this), function() {
+})(typeof self !== 'undefined' ? self : typeof window !== 'undefined' ? window : this, function() {
 return /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
