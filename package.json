@@ -2,7 +2,7 @@
 	"main": "dist/vue-gdpr-guard.umd.js",
 	"types": "types/index.d.ts",
 	"name": "vue-gdpr-guard",
-	"version": "2.2.2",
+	"version": "2.3.0",
 	"license": "MIT",
 	"keywords": [
 		"gdpr",
@@ -30,8 +30,8 @@
 		"deploy:docs": "gh-pages -d docs"
 	},
 	"dependencies": {
-		"gdpr-guard": "^2.2.1",
-		"vue-types": "^4.1.1"
+		"gdpr-guard": "^2.3.0",
+		"vue-types": "^5.0.2"
 	},
 	"bugs": {
 		"url": "https://github.com/Voltra/vue-gdpr-guard/issues"
