@@ -2,7 +2,7 @@
 	"main": "dist/vue-gdpr-guard.umd.js",
 	"types": "types/index.d.ts",
 	"name": "vue-gdpr-guard",
-	"version": "2.2.2",
+	"version": "2.3.0",
 	"license": "MIT",
 	"keywords": [
 		"gdpr",
