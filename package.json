@@ -52,8 +52,8 @@
 		"gh-pages": "^3.2.3",
 		"vue": "^2.6.0",
 		"vue-template-compiler": "^2.6.0",
-		"vuepress": "^1.9.7",
-		"vuepress-plugin-clean-urls": "^1.1.2",
+		"vuepress": "1.9.7",
+		"vuepress-plugin-clean-urls": "1.1.2",
 		"webpack": "^4.0.0"
 	}
 }
