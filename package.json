@@ -30,8 +30,8 @@
 		"deploy:docs": "gh-pages -d docs"
 	},
 	"dependencies": {
-		"gdpr-guard": "^2.2.1",
-		"vue-types": "^4.1.1"
+		"gdpr-guard": "^2.3.0",
+		"vue-types": "^5.0.2"
 	},
 	"bugs": {
 		"url": "https://github.com/Voltra/vue-gdpr-guard/issues"
