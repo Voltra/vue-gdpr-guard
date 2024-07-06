@@ -1,10 +1,11 @@
-import { GdprSaviorAdapter } from "gdpr-guard";
+import { GdprDeserializer as $gdpr, GdprSaviorAdapter } from "gdpr-guard";
+import Vue from "vue";
 
 export class VueSavior extends GdprSaviorAdapter {
 	/**
 	 * Wrap a GdprSavior in a VueSavior
 	 * @param {(typeof Vue)|Vue} Vue - The Vue class (or instance) in use
-	 * @param {import("gdpr-guard/dist/serde/GdprSavior").GdprSavior} savior - The savior to wrap
+	 * @param {import("gdpr-guard").GdprSavior} savior - The savior to wrap
 	 */
 	constructor(Vue, savior) {
 		super();
@@ -94,5 +95,17 @@ export class VueSavior extends GdprSaviorAdapter {
 	 */
 	storeIfNotExists(manager) {
 		return this.savior.storeIfNotExists(manager);
+	}
+
+	/**
+	 * @inheritDoc
+	 * @override
+	 */
+	decorate(manager) {
+		if (typeof this.savior.decorate !== "undefined") {
+			return this.savior.decorate(manager);
+		}
+
+		return super.decorate(manager);
 	}
 }

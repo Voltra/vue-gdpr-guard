@@ -30,7 +30,7 @@
 		"deploy:docs": "gh-pages -d docs"
 	},
 	"dependencies": {
-		"gdpr-guard": "^2.3.0",
+		"gdpr-guard": "^2.4.1",
 		"vue-types": "^5.0.2"
 	},
 	"bugs": {
