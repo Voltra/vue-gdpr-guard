@@ -1,5 +1,4 @@
-import { GdprDeserializer as $gdpr, GdprSaviorAdapter } from "gdpr-guard";
-import Vue from "vue";
+import { GdprSaviorAdapter } from "gdpr-guard";
 
 export class VueSavior extends GdprSaviorAdapter {
 	/**
