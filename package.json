@@ -2,7 +2,7 @@
 	"main": "dist/vue-gdpr-guard.umd.js",
 	"types": "types/index.d.ts",
 	"name": "vue-gdpr-guard",
-	"version": "2.3.0",
+	"version": "2.4.0",
 	"license": "MIT",
 	"keywords": [
 		"gdpr",
@@ -30,7 +30,7 @@
 		"deploy:docs": "gh-pages -d docs"
 	},
 	"dependencies": {
-		"gdpr-guard": "^2.3.0",
+		"gdpr-guard": "^2.4.1",
 		"vue-types": "^5.0.2"
 	},
 	"bugs": {
@@ -49,7 +49,7 @@
 		"eslint": "^7.5.0",
 		"eslint-loader": "^4.0.2",
 		"eslint-plugin-vue": "^7.20.0",
-		"gh-pages": "^3.2.3",
+		"gh-pages": "^6.1.1",
 		"vue": "^2.6.0",
 		"vue-template-compiler": "^2.6.0",
 		"vuepress": "1.9.7",
